@@ -6,32 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Thorn Horwell</title>
     <link rel="stylesheet" href="style.css" />
-    <style>
-        .menu-toggle {
-            background: none;
-            border: none;
-            font-size: 2rem;
-            color: #00d8ff;
-            position: absolute;
-            top: 1rem;
-            left: 1rem;
-            z-index: 20;
-        }
-        .navbar nav {
-            display: none;
-            flex-direction: column;
-            background-color: #1a1a1a;
-            padding: 1rem;
-            position: absolute;
-            top: 3.5rem;
-            left: 0;
-            width: 100%;
-            text-align: center;
-        }
-        .navbar nav.show {
-            display: flex;
-        }
-    </style>
     <script>
         function toggleMenu() {
             const nav = document.getElementById('navMenu');
@@ -43,10 +17,10 @@
     <header class="navbar">
         <button class="menu-toggle" onclick="toggleMenu()">☰</button>
         <nav id="navMenu">
-            <a href="#welcome">Welcome</a>
-            <a href="#about">About</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
+            <a href="#welcome" onclick="toggleMenu()">Welcome</a>
+            <a href="#about" onclick="toggleMenu()">About</a>
+            <a href="#projects" onclick="toggleMenu()">Projects</a>
+            <a href="#contact" onclick="toggleMenu()">Contact</a>
         </nav>
     </header>
 
