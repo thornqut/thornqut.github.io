@@ -43,13 +43,16 @@ body {
     font-size: 1.2rem;
     color: #a0a0a0;
 }
-.profile-placeholder {
-    width: 120px;
-    height: 120px;
+.profile-pic {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
     border-radius: 50%;
-    background-color: #333;
+    border: 3px solid #00d8ff;
+    display: block;
     margin: 1rem auto;
 }
+
 footer {
     text-align: center;
     padding: 1rem;
