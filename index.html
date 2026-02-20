@@ -1,60 +1,186 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Thorn Horwell</title>
-    <link rel="stylesheet" href="style.css" />
-    <script>
-        function toggleMenu() {
-            const nav = document.getElementById('navMenu');
-            nav.classList.toggle('show');
-        }
-    </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thorn Horwell</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById('navMenu');
+      nav.classList.toggle('show');
+    }
+  </script>
 </head>
+
 <body>
-    <header class="navbar">
-        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-        <nav id="navMenu">
-            <a href="#welcome" onclick="toggleMenu()">Welcome</a>
-            <a href="#about" onclick="toggleMenu()">About</a>
-            <a href="#projects" onclick="toggleMenu()">Projects</a>
-            <a href="#contact" onclick="toggleMenu()">Contact</a>
-        </nav>
-    </header>
+  <header class="navbar nav">
+    <div class="container nav-inner">
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open menu">☰</button>
 
-    <section id="welcome" class="section">
-        <h1>Thorn Horwell</h1>
-        <img src="photo/thorn.JPG" alt="Thorn Horwell" class="profile-pic" />
-        <p class="tagline">Final-year IT student passionate about building impactful systems and leading with precision.</p>
-    </section>
+      <!-- optional: add a simple brand on desktop (menu overlay still works) -->
+      <div style="font-weight:800; letter-spacing:-0.02em;">Thorn Horwell</div>
 
-    <section id="about" class="section">
-        <h2>About Me</h2>
-        <p>I’m Thorn Horwell — a final-year Information Technology student with a strong interest in tech strategy, human-centered systems, and impactful digital solutions. I enjoy leading projects, solving problems, and blending creativity with functionality. Whether it's working on software, IoT, or IT project planning, I bring energy, clarity, and drive to everything I do.</p>
-    </section>
+      <!-- keep your overlay nav -->
+      <nav id="navMenu" aria-label="Site navigation">
+        <a href="#welcome" onclick="toggleMenu()">Welcome</a>
+        <a href="#about" onclick="toggleMenu()">About</a>
+        <a href="#projects" onclick="toggleMenu()">Projects</a>
+        <a href="#contact" onclick="toggleMenu()">Contact</a>
+      </nav>
+    </div>
+  </header>
 
-    <section id="projects" class="section">
-        <h2>Projects</h2>
-        <ul>
-            <li><a href="we-hab.html">We-Hab: Wellness & Recovery App</a></li>
-            <li><a href="har-wearable.html">HAR System: Wearable IoT + Machine Learning</a></li>
-            <li><a href="cloud-api.html">Cloud API: Dockerized App on AWS</a></li>
-            <li><a href="capstone.html">Capstone: CamVision AI Surveillance Project</a></li>
-            <li><a href="web-app.html">Web App: Rapid Web Development Project</a></li>
-        </ul>
-    </section>
+  <!-- HERO -->
+  <section id="welcome" class="section hero">
+    <div class="container">
+      <div class="kicker">Final-year IT student</div>
+      <h1>Thorn Horwell</h1>
 
-    <section id="contact" class="section">
-        <h2>Contact</h2>
-        <p>Email: <a href="mailto:thornhorwell@icloud.com">thornhorwell@icloud.com</a></p>
-        <p>GitHub: <a href="https://github.com/thornqut" target="_blank">github.com/thornqut</a></p>
-        <p>LinkedIn: <a href="https://au.linkedin.com/in/thorn-horwell-680815323">Thorn Horwell</a></p>
-    </section>
+      <img src="photo/thorn.JPG" alt="Thorn Horwell" class="profile-pic" />
 
-    <footer>
-        <p>&copy; 2026 Thorn Horwell</p>
-    </footer>
+      <p class="tagline lead">
+        I build impactful systems across software, cloud, and IoT — with a focus on clarity,
+        human-centered design, and execution.
+      </p>
+
+      <div class="actions">
+        <a class="btn primary" href="#projects">View Projects</a>
+        <a class="btn" href="https://github.com/thornqut" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="https://au.linkedin.com/in/thorn-horwell-680815323" target="_blank" rel="noopener">LinkedIn</a>
+        <!-- Add a resume PDF later and swap this link -->
+        <!-- <a class="btn" href="assets/Thorn-Horwell-Resume.pdf" target="_blank" rel="noopener">Resume</a> -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <div class="container">
+      <h2>About</h2>
+      <p class="tagline">
+        I’m Thorn Horwell — a final-year Information Technology student interested in tech strategy,
+        human-centered systems, and practical digital solutions. I enjoy leading projects, solving messy
+        problems, and blending design-level thinking with clean implementation across software, cloud,
+        and IoT.
+      </p>
+
+      <!-- quick credibility row -->
+      <div class="grid" style="margin-top:18px;">
+        <div class="card" style="grid-column: span 4;">
+          <h3>Strengths</h3>
+          <p class="meta">Communication • Planning • Delivery</p>
+        </div>
+        <div class="card" style="grid-column: span 4;">
+          <h3>Interests</h3>
+          <p class="meta">Product • Cloud • Systems</p>
+        </div>
+        <div class="card" style="grid-column: span 4;">
+          <h3>Focus</h3>
+          <p class="meta">Impactful, well-designed work</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="section">
+    <div class="container">
+      <h2>Projects</h2>
+      <p class="tagline">Selected work — click a project for the full case study.</p>
+
+      <div class="grid">
+        <a class="card" href="we-hab.html">
+          <h3>We-Hab — Wellness & Recovery App</h3>
+          <p>JavaFX app with authentication + persistence for a rehab-focused wellness workflow.</p>
+          <div class="tags">
+            <span class="tag">Java</span>
+            <span class="tag">JavaFX</span>
+            <span class="tag">SQLite</span>
+          </div>
+        </a>
+
+        <a class="card" href="har-wearable.html">
+          <h3>Wearable HAR — IoT + Machine Learning</h3>
+          <p>Human Activity Recognition prototype using wearable sensor data + an ML pipeline.</p>
+          <div class="tags">
+            <span class="tag">IoT</span>
+            <span class="tag">Python</span>
+            <span class="tag">ML</span>
+          </div>
+        </a>
+
+        <a class="card" href="cloud-api.html">
+          <h3>Cloud API — Dockerized App on AWS</h3>
+          <p>Containerised REST API deployed to AWS (EC2 + ECR), designed for repeatable delivery.</p>
+          <div class="tags">
+            <span class="tag">Docker</span>
+            <span class="tag">AWS</span>
+            <span class="tag">REST</span>
+          </div>
+        </a>
+
+        <a class="card" href="capstone.html">
+          <h3>Capstone — CamVision AI (CCTV Monitoring)</h3>
+          <p>Industry capstone planning + architecture for intelligent CCTV monitoring and alerts.</p>
+          <div class="tags">
+            <span class="tag">Architecture</span>
+            <span class="tag">Cloud</span>
+            <span class="tag">AI</span>
+          </div>
+        </a>
+
+        <a class="card" href="web-app.html">
+          <h3>Rapid Web App — Event Booking</h3>
+          <p>Designed and built a web booking concept, iterated as a team into a working application.</p>
+          <div class="tags">
+            <span class="tag">Web</span>
+            <span class="tag">Team Build</span>
+            <span class="tag">UX</span>
+          </div>
+        </a>
+
+        <!-- optional 6th card: keeps the grid looking full -->
+        <div class="card" style="opacity:.85;">
+          <h3>Now</h3>
+          <p>Finishing my degree and polishing case studies + portfolio for graduate roles.</p>
+          <div class="tags">
+            <span class="tag">2026</span>
+            <span class="tag">Graduate Ready</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section">
+    <div class="container">
+      <h2>Contact</h2>
+      <p class="tagline">If you want to chat opportunities, collabs, or projects — reach out.</p>
+
+      <div class="grid" style="margin-top:18px;">
+        <div class="card" style="grid-column: span 4;">
+          <h3>Email</h3>
+          <p><a href="mailto:thornhorwell@icloud.com">thornhorwell@icloud.com</a></p>
+        </div>
+        <div class="card" style="grid-column: span 4;">
+          <h3>GitHub</h3>
+          <p><a href="https://github.com/thornqut" target="_blank" rel="noopener">github.com/thornqut</a></p>
+        </div>
+        <div class="card" style="grid-column: span 4;">
+          <h3>LinkedIn</h3>
+          <p><a href="https://au.linkedin.com/in/thorn-horwell-680815323" target="_blank" rel="noopener">Thorn Horwell</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 Thorn Horwell</p>
+    </div>
+  </footer>
 </body>
 </html>
