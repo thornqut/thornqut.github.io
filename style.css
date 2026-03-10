@@ -32,8 +32,14 @@ body{
   line-height: 1.6;
 }
 
-a{ color: var(--accent); text-decoration:none; }
-a:hover{ opacity:.9; }
+a{
+  color: var(--accent);
+  text-decoration:none;
+}
+
+a:hover{
+  opacity:.95;
+}
 
 .container{
   width: min(var(--max), calc(100% - 48px));
@@ -56,21 +62,24 @@ a:hover{ opacity:.9; }
 }
 
 .navbar nav{
-  /* keep your overlay menu */
   display:none;
   flex-direction: column;
   position: fixed;
   inset: 0;
   background-color: rgba(14, 14, 14, 0.92);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   justify-content:center;
   align-items:center;
   gap: 1.6rem;
   z-index: 1001;
   border-right: 1px solid var(--line);
+  padding: 24px;
 }
 
-.navbar nav.show{ display:flex; }
+.navbar nav.show{
+  display:flex;
+}
 
 .navbar nav a{
   font-size: 1.1rem;
@@ -79,7 +88,9 @@ a:hover{ opacity:.9; }
   padding: 10px 16px;
   border-radius: 999px;
   border: 1px solid transparent;
+  text-align: center;
 }
+
 .navbar nav a:hover{
   border-color: var(--line);
   background: rgba(255,255,255,.04);
@@ -106,7 +117,10 @@ h2{
   letter-spacing: -0.01em;
 }
 
-p{ margin: 0 0 14px; }
+p{
+  margin: 0 0 14px;
+}
+
 .tagline{
   font-size: 1.1rem;
   color: var(--muted);
@@ -114,7 +128,6 @@ p{ margin: 0 0 14px; }
   margin: 0 auto;
 }
 
-/* A subtle “kicker” line if you add it in HTML */
 .kicker{
   color: var(--muted);
   font-weight: 800;
@@ -138,7 +151,7 @@ p{ margin: 0 0 14px; }
 }
 
 /* =========================
-   6) Buttons (this is what makes it feel “finished”)
+   6) Buttons
 ========================= */
 .actions{
   display:flex;
@@ -151,6 +164,7 @@ p{ margin: 0 0 14px; }
 .btn{
   display:inline-flex;
   align-items:center;
+  justify-content:center;
   gap: 10px;
   padding: 12px 16px;
   border-radius: 999px;
@@ -159,9 +173,14 @@ p{ margin: 0 0 14px; }
   color: var(--text);
   font-weight: 700;
   box-shadow: 0 8px 24px rgba(0,0,0,.25);
-  transition: transform .15s ease, background .15s ease;
+  transition: transform .15s ease, background .15s ease, border-color .15s ease;
 }
-.btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.06); }
+
+.btn:hover{
+  transform: translateY(-1px);
+  background: rgba(255,255,255,.06);
+  border-color: rgba(255,255,255,.16);
+}
 
 .btn.primary{
   border-color: rgba(0,216,255,.50);
@@ -181,23 +200,64 @@ p{ margin: 0 0 14px; }
 }
 
 .card{
-  grid-column: span 6;
-  background: var(--panel);
-  border: 1px solid var(--line);
+  grid-column: span 3;
+  position: relative;
+  background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+  border: 1px solid rgba(255,255,255,.10);
   border-radius: var(--radius);
   padding: 18px;
-  box-shadow: var(--shadow);
-  transition: transform .15s ease, border-color .15s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,.28);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition:
+    transform .22s ease,
+    border-color .22s ease,
+    box-shadow .22s ease,
+    background .22s ease;
+  overflow: hidden;
 }
+
+.card::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(0,216,255,.28),
+    rgba(255,255,255,.06),
+    rgba(0,216,255,.10)
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: .45;
+}
+
 .card:hover{
-  transform: translateY(-2px);
+  transform: translateY(-6px);
   border-color: rgba(0,216,255,.35);
+  box-shadow:
+    0 18px 40px rgba(0,0,0,.35),
+    0 0 0 1px rgba(0,216,255,.08);
+  background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
 }
 
 .card h3{
   margin: 0 0 6px;
   font-size: 18px;
+  color: var(--text);
+  transition: color .22s ease;
 }
+
+.card:hover h3{
+  color: #ffffff;
+}
+
 .card p{
   color: var(--muted);
   margin: 0 0 12px;
@@ -208,6 +268,7 @@ p{ margin: 0 0 14px; }
   gap: 8px;
   flex-wrap: wrap;
 }
+
 .tag{
   font-size: 12px;
   color: var(--muted);
@@ -215,6 +276,45 @@ p{ margin: 0 0 14px; }
   padding: 6px 10px;
   border-radius: 999px;
   background: rgba(0,0,0,.18);
+  transition:
+    border-color .22s ease,
+    color .22s ease,
+    background .22s ease;
+}
+
+.card:hover .tag{
+  border-color: rgba(0,216,255,.22);
+  color: #d8faff;
+  background: rgba(0,216,255,.07);
+}
+
+/* center last card on desktop */
+.grid .card:last-child{
+  grid-column: 5 / span 4;
+}
+
+/* highlight capstone card (4th card) */
+.grid .card:nth-child(4){
+  border-color: rgba(0,216,255,.28);
+  box-shadow:
+    0 14px 34px rgba(0,0,0,.34),
+    0 0 0 1px rgba(0,216,255,.08);
+}
+
+.grid .card:nth-child(4)::after{
+  content: "Featured";
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: #001014;
+  background: linear-gradient(135deg, rgba(0,216,255,.95), rgba(0,216,255,.65));
+  padding: 6px 10px;
+  border-radius: 999px;
+  box-shadow: 0 8px 20px rgba(0,216,255,.18);
 }
 
 /* =========================
@@ -231,7 +331,162 @@ footer{
 /* =========================
    9) Responsive
 ========================= */
+
+/* large tablets / small laptops */
+@media (max-width: 1100px){
+  .container{
+    width: min(var(--max), calc(100% - 36px));
+  }
+
+  .grid .card{
+    grid-column: span 6;
+  }
+
+  .grid .card:last-child{
+    grid-column: 4 / span 6;
+  }
+}
+
+/* tablets / iPad */
 @media (max-width: 860px){
-  .section{ padding: 56px 0; }
-  .card{ grid-column: span 12; }
+  .section{
+    padding: 56px 0;
+  }
+
+  .container{
+    width: min(var(--max), calc(100% - 28px));
+  }
+
+  h1{
+    font-size: clamp(32px, 6vw, 46px);
+  }
+
+  h2{
+    font-size: 24px;
+  }
+
+  .tagline{
+    font-size: 1rem;
+    max-width: 100%;
+  }
+
+  .profile-pic{
+    width: 120px;
+    height: 120px;
+  }
+
+  .actions{
+    gap: 10px;
+  }
+
+  .btn{
+    padding: 11px 15px;
+    font-size: .95rem;
+  }
+
+  .grid .card{
+    grid-column: span 6;
+  }
+
+  .grid .card:last-child{
+    grid-column: 4 / span 6;
+  }
+}
+
+/* phones */
+@media (max-width: 640px){
+  .container{
+    width: calc(100% - 22px);
+  }
+
+  .section{
+    padding: 46px 0;
+  }
+
+  h1{
+    font-size: clamp(28px, 8vw, 38px);
+    line-height: 1.1;
+  }
+
+  h2{
+    font-size: 22px;
+  }
+
+  p{
+    font-size: .98rem;
+  }
+
+  .tagline{
+    font-size: .98rem;
+  }
+
+  .menu-toggle{
+    font-size: 1.8rem;
+    top: .85rem;
+    left: .85rem;
+  }
+
+  .navbar nav a{
+    font-size: 1rem;
+    padding: 8px 14px;
+  }
+
+  .profile-pic{
+    width: 104px;
+    height: 104px;
+    margin: 14px auto 12px;
+  }
+
+  .actions{
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .btn{
+    width: 100%;
+  }
+
+  .grid{
+    gap: 14px;
+  }
+
+  .grid .card{
+    grid-column: span 12;
+    padding: 16px;
+  }
+
+  .grid .card:last-child{
+    grid-column: span 12;
+  }
+
+  .card h3{
+    font-size: 17px;
+  }
+
+  .card p{
+    font-size: .95rem;
+  }
+
+  .tags{
+    gap: 6px;
+  }
+
+  .tag{
+    font-size: 11px;
+    padding: 5px 9px;
+  }
+
+  .grid .card:nth-child(4)::after{
+    top: 12px;
+    right: 12px;
+    font-size: 10px;
+    padding: 5px 8px;
+  }
+
+  footer{
+    padding: 22px 0 32px;
+    font-size: .92rem;
+  }
 }
