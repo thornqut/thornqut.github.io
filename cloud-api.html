@@ -5,52 +5,550 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cloud API: Dockerized App on AWS</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .project-page{
+      padding: 88px 0 56px;
+      text-align: left;
+    }
+
+    .project-shell{
+      width: min(920px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .project-hero{
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 16px 40px rgba(0,0,0,.30);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      margin-bottom: 18px;
+    }
+
+    .eyebrow{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .project-hero h1{
+      margin: 0 0 14px;
+      line-height: 1.05;
+    }
+
+    .project-lead{
+      font-size: 1.06rem;
+      color: var(--muted);
+      max-width: 70ch;
+      margin: 0;
+    }
+
+    .project-actions{
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 22px;
+    }
+
+    .project-btn{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      box-shadow: 0 8px 24px rgba(0,0,0,.20);
+    }
+
+    .project-btn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.16);
+      opacity: 1;
+    }
+
+    .project-btn.primary{
+      border-color: rgba(0,216,255,.50);
+      background: linear-gradient(135deg, rgba(0,216,255,.95), rgba(0,216,255,.45));
+      color: #001014;
+    }
+
+    .project-grid{
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .project-card{
+      display: block;
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: 0 12px 34px rgba(0,0,0,.26);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .section-label{
+      display: block;
+      margin-bottom: 8px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .project-card > h2,
+    .gallery-heading h2{
+      margin: 0 0 12px;
+      max-width: 22ch;
+      line-height: 1.2;
+    }
+
+    .gallery-heading h2{
+      max-width: none;
+    }
+
+    .project-card > p,
+    .project-card li,
+    .gallery-heading p{
+      line-height: 1.65;
+    }
+
+    .detail-list{
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 12px;
+      max-width: 72ch;
+    }
+
+    .detail-list li{
+      color: var(--muted);
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .detail-list li::before{
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+      position: absolute;
+      left: 0;
+      top: .62em;
+      box-shadow: 0 0 12px rgba(0,216,255,.45);
+    }
+
+    .project-card p{
+      max-width: 74ch;
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .stack-list{
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      max-width: 74ch;
+    }
+
+    .stack-list li{
+      font-size: 12px;
+      line-height: 1;
+      color: var(--text);
+      border: 1px solid var(--line);
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.04);
+      white-space: nowrap;
+    }
+
+    .gallery-card{
+      margin-top: 4px;
+    }
+
+    .gallery-heading{
+      display: block;
+      margin-bottom: 14px;
+    }
+
+    .gallery-heading p{
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: .96rem;
+    }
+
+    .project-gallery{
+      display: flex;
+      gap: 16px;
+      margin-top: 18px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding-bottom: 8px;
+      scroll-snap-type: x proximity;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .project-gallery::-webkit-scrollbar{
+      height: 10px;
+    }
+
+    .project-gallery::-webkit-scrollbar-track{
+      background: rgba(255,255,255,.04);
+      border-radius: 999px;
+    }
+
+    .project-gallery::-webkit-scrollbar-thumb{
+      background: rgba(255,255,255,.14);
+      border-radius: 999px;
+    }
+
+    .project-gallery::-webkit-scrollbar-thumb:hover{
+      background: rgba(255,255,255,.22);
+    }
+
+    .gallery-image{
+      flex: 0 0 auto;
+      width: 320px;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+      box-shadow: 0 10px 24px rgba(0,0,0,.25);
+      scroll-snap-align: start;
+    }
+
+    .gallery-image:hover{
+      transform: translateY(-4px);
+      border-color: rgba(0,216,255,.35);
+      box-shadow: 0 16px 30px rgba(0,0,0,.35);
+    }
+
+    .lightbox{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.88);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      padding: 24px;
+    }
+
+    .lightbox.show{
+      display: flex;
+    }
+
+    .lightbox-content{
+      max-width: 90vw;
+      max-height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #lightbox-img{
+      max-width: 100%;
+      max-height: 85vh;
+      border-radius: 16px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.45);
+      border: 1px solid rgba(255,255,255,.12);
+    }
+
+    .lightbox-close,
+    .lightbox-prev,
+    .lightbox-next{
+      position: absolute;
+      background: rgba(255,255,255,.08);
+      color: white;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 999px;
+      cursor: pointer;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      transition: background .2s ease, transform .2s ease, border-color .2s ease;
+    }
+
+    .lightbox-close:hover,
+    .lightbox-prev:hover,
+    .lightbox-next:hover{
+      background: rgba(255,255,255,.14);
+      border-color: rgba(255,255,255,.24);
+      transform: scale(1.05);
+    }
+
+    .lightbox-close{
+      top: 24px;
+      right: 24px;
+      font-size: 2rem;
+    }
+
+    .lightbox-prev{
+      left: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .lightbox-next{
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .lightbox-prev:hover,
+    .lightbox-next:hover{
+      transform: translateY(-50%) scale(1.05);
+    }
+
+    @media (max-width: 640px){
+      .project-page{
+        padding: 76px 0 42px;
+      }
+
+      .project-shell{
+        width: calc(100% - 22px);
+      }
+
+      .project-hero,
+      .project-card{
+        padding: 18px;
+        border-radius: 18px;
+      }
+
+      .project-actions{
+        flex-direction: column;
+      }
+
+      .project-btn{
+        width: 100%;
+      }
+
+      .project-card > h2,
+      .gallery-heading h2{
+        max-width: none;
+      }
+
+      .gallery-heading{
+        margin-bottom: 12px;
+      }
+
+      .stack-list li{
+        white-space: normal;
+      }
+
+      .gallery-image{
+        width: 260px;
+        height: 170px;
+      }
+
+      .lightbox{
+        padding: 16px;
+      }
+
+      .lightbox-close{
+        top: 14px;
+        right: 14px;
+      }
+
+      .lightbox-prev{
+        left: 10px;
+      }
+
+      .lightbox-next{
+        right: 10px;
+      }
+
+      .lightbox-close,
+      .lightbox-prev,
+      .lightbox-next{
+        width: 42px;
+        height: 42px;
+        font-size: 1.2rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <header class="navbar">
-    <nav><a href="index.html">← Back to Home</a></nav>
+  <header class="navbar" style="padding: 18px 0 0;">
+    <div class="project-shell">
+      <nav><a href="index.html#projects">← Back to Projects</a></nav>
+    </div>
   </header>
 
-  <main class="section">
-    <h1>Cloud API: Dockerized Web Application on AWS</h1>
+  <main class="section project-page">
+    <div class="project-shell">
+      <section class="project-hero">
+        <div class="eyebrow">Case Study • Cloud • AWS</div>
+        <h1>Cloud API: Dockerized Web Application on AWS</h1>
+        <p class="project-lead">A containerized REST API project focused on cloud deployment, stateless architecture, and secure endpoint delivery using Docker and AWS infrastructure.</p>
 
-    <p><strong>Overview:</strong></p>
-    <p>This project involved deploying a containerized REST API to AWS EC2 using Docker and Amazon ECR. The application handled basic user authentication using JWT and executed CPU-intensive operations. It was designed to be stateless, scalable, and production-ready using cloud-based infrastructure and best practices.</p>
+        <div class="project-actions">
+          <a class="project-btn primary" href="#gallery">View Project Screenshots</a>
+          <a class="project-btn" href="index.html#projects">Back to Projects</a>
+        </div>
+      </section>
 
-    <p><strong>Tech Stack:</strong> Python (Flask), Docker, AWS EC2, ECR, S3, JWT, GitHub, Linux CLI</p>
+      <div class="project-grid">
+        <section class="project-card">
+          <span class="section-label">Overview</span>
+          <h2>What this project involved</h2>
+          <p>This project involved deploying a containerized REST API to AWS EC2 using Docker and Amazon ECR. The application handled basic user authentication using JWT and executed CPU-intensive operations. It was designed to be stateless, scalable, and production-ready using cloud-based infrastructure and best practices.</p>
+        </section>
 
-    <p><strong>My Role:</strong></p>
-    <ul>
-      <li>Designed and implemented the full deployment pipeline using Docker & AWS</li>
-      <li>Configured AWS EC2 instance with firewall rules, SSH access, and Linux environment</li>
-      <li>Containerized the REST API and pushed image to Amazon ECR</li>
-      <li>Wrote and demoed the CPU-intensive endpoint with logging & JWT protection</li>
-    </ul>
+        <section class="project-card">
+          <span class="section-label">Tech Stack</span>
+          <h2>Tools and technologies</h2>
+          <ul class="stack-list">
+            <li>Python</li>
+            <li>Flask</li>
+            <li>Docker</li>
+            <li>AWS EC2</li>
+            <li>Amazon ECR</li>
+            <li>Amazon S3</li>
+            <li>JWT</li>
+            <li>Linux CLI</li>
+          </ul>
+        </section>
 
-    <p><strong>Key Features:</strong></p>
-    <ul>
-      <li>RESTful API endpoints secured with JWT tokens</li>
-      <li>Stateless architecture using cloud storage and session-less logic</li>
-      <li>Custom Docker image with CPU-bound background task</li>
-      <li>Deployed via EC2 and tested for scalability and fault tolerance</li>
-    </ul>
+        <section class="project-card">
+          <span class="section-label">My Role</span>
+          <h2>Where I contributed</h2>
+          <ul class="detail-list">
+            <li>Designed and implemented the full deployment pipeline using Docker and AWS</li>
+            <li>Configured the AWS EC2 instance with firewall rules, SSH access, and Linux environment setup</li>
+            <li>Containerized the REST API and pushed the image to Amazon ECR</li>
+            <li>Built and demonstrated the CPU-intensive endpoint with logging and JWT protection</li>
+          </ul>
+        </section>
 
-    <p><strong>Links:</strong></p>
-    <ul>
-      <li><a href="#" target="_blank">GitHub Repository (placeholder)</a></li>
-      <li><a href="#" target="_blank">Deployment Demo (placeholder)</a></li>
-    </ul>
+        <section class="project-card">
+          <span class="section-label">Key Features</span>
+          <h2>Main project outcomes</h2>
+          <ul class="detail-list">
+            <li>RESTful API endpoints secured with JWT tokens</li>
+            <li>Stateless architecture using cloud storage and session-less logic</li>
+            <li>Custom Docker image with a CPU-bound background task</li>
+            <li>Deployed via EC2 and tested for scalability and fault tolerance</li>
+          </ul>
+        </section>
+      </div>
 
-    <p><strong>Screenshots / Architecture Diagram:</strong></p>
-    <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-      <img src="cloud-arch.jpg" alt="Cloud Architecture Diagram" style="width: 300px;" />
-      <img src="cloud-terminal.jpg" alt="Deployment CLI Screenshot" style="width: 300px;" />
-      <!-- Replace image filenames with real ones -->
+      <section id="gallery" class="project-card gallery-card">
+        <div class="gallery-heading">
+          <span class="section-label">Gallery</span>
+          <h2>Project Screenshots</h2>
+          <p>Scroll sideways to browse all images, then click any screenshot to open it full-screen.</p>
+        </div>
+
+        <div class="project-gallery">
+          <img src="cloud-arch.jpg" alt="Cloud architecture diagram" class="gallery-image" />
+          <img src="cloud-terminal.jpg" alt="Deployment CLI screenshot" class="gallery-image" />
+        </div>
+      </section>
     </div>
   </main>
 
   <footer>
     <p>&copy; 2026 Thorn Horwell</p>
   </footer>
+
+  <div id="lightbox" class="lightbox">
+    <button class="lightbox-close" aria-label="Close preview">&times;</button>
+    <button class="lightbox-prev" aria-label="Previous image">&#10094;</button>
+
+    <div class="lightbox-content">
+      <img id="lightbox-img" src="" alt="Expanded project image">
+    </div>
+
+    <button class="lightbox-next" aria-label="Next image">&#10095;</button>
+  </div>
+
+  <script>
+    const galleryImages = document.querySelectorAll('.gallery-image');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeBtn = document.querySelector('.lightbox-close');
+    const prevBtn = document.querySelector('.lightbox-prev');
+    const nextBtn = document.querySelector('.lightbox-next');
+
+    let currentIndex = 0;
+    const images = Array.from(galleryImages);
+
+    function showImage(index) {
+      currentIndex = index;
+      lightboxImg.src = images[currentIndex].src;
+      lightboxImg.alt = images[currentIndex].alt;
+      lightbox.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    function showNextImage() {
+      currentIndex = (currentIndex + 1) % images.length;
+      lightboxImg.src = images[currentIndex].src;
+      lightboxImg.alt = images[currentIndex].alt;
+    }
+
+    function showPrevImage() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      lightboxImg.src = images[currentIndex].src;
+      lightboxImg.alt = images[currentIndex].alt;
+    }
+
+    images.forEach((img, index) => {
+      img.addEventListener('click', () => showImage(index));
+    });
+
+    closeBtn.addEventListener('click', closeLightbox);
+    nextBtn.addEventListener('click', showNextImage);
+    prevBtn.addEventListener('click', showPrevImage);
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('show')) return;
+
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') showNextImage();
+      if (e.key === 'ArrowLeft') showPrevImage();
+    });
+  </script>
 </body>
 </html>

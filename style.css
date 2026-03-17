@@ -46,6 +46,11 @@ a:hover{
   opacity: .95;
 }
 
+:focus-visible{
+  outline: 2px solid rgba(0,216,255,.85);
+  outline-offset: 3px;
+}
+
 .container{
   width: min(var(--max), calc(100% - 48px));
   margin: 0 auto;
@@ -66,7 +71,17 @@ a:hover{
   cursor: pointer;
 }
 
-.navbar nav{
+.menu-toggle:hover{
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.nav-brand{
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+#navMenu{
   display: none;
   flex-direction: column;
   position: fixed;
@@ -82,11 +97,27 @@ a:hover{
   padding: 24px;
 }
 
-.navbar nav.show{
+#navMenu.show{
   display: flex;
 }
 
-.navbar nav a{
+.nav-close{
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.nav-close:hover{
+  opacity: 1;
+  transform: scale(1.04);
+}
+
+#navMenu a{
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--text);
@@ -96,7 +127,7 @@ a:hover{
   text-align: center;
 }
 
-.navbar nav a:hover{
+#navMenu a:hover{
   border-color: var(--line);
   background: rgba(255,255,255,.04);
 }
@@ -197,6 +228,15 @@ p{
   color: #001014;
 }
 
+.btn:focus-visible,
+.project-card:focus-visible,
+#navMenu a:focus-visible,
+.menu-toggle:focus-visible,
+.nav-close:focus-visible{
+  outline: 2px solid rgba(0,216,255,.85);
+  outline-offset: 3px;
+}
+
 /* =========================
    7) General grid cards
 ========================= */
@@ -206,6 +246,18 @@ p{
   gap: 16px;
   margin-top: 18px;
   text-align: left;
+}
+
+.span-4{
+  grid-column: span 4;
+}
+
+.span-6{
+  grid-column: span 6;
+}
+
+.span-12{
+  grid-column: span 12;
 }
 
 .card{
@@ -471,6 +523,11 @@ footer,
     grid-column: span 6;
   }
 
+  .span-4,
+  .span-6{
+    grid-column: span 6;
+  }
+
   .projects-grid{
     grid-template-columns: 1fr;
   }
@@ -512,7 +569,7 @@ footer,
     left: .85rem;
   }
 
-  .navbar nav a{
+  #navMenu a{
     font-size: 1rem;
     padding: 8px 14px;
   }
@@ -541,6 +598,12 @@ footer,
   .card{
     grid-column: span 12;
     padding: 16px;
+  }
+
+  .span-4,
+  .span-6,
+  .span-12{
+    grid-column: span 12;
   }
 
   .projects-grid{
