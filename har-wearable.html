@@ -88,9 +88,8 @@
 
     .project-grid{
       display: grid;
-      grid-template-columns: 1.15fr .85fr;
+      grid-template-columns: 1fr;
       gap: 16px;
-      align-items: start;
       margin-bottom: 16px;
     }
 
@@ -187,15 +186,12 @@
     }
 
     .gallery-heading{
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 4px;
+      display: block;
+      margin-bottom: 14px;
     }
 
     .gallery-heading p{
-      margin: 0;
+      margin-top: 6px;
       color: var(--muted);
       font-size: .96rem;
     }
@@ -216,17 +212,37 @@
     }
 
     .project-gallery{
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      display: flex;
       gap: 16px;
-      margin-top: 20px;
-      max-width: 980px;
-      margin-left: auto;
-      margin-right: auto;
+      margin-top: 18px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding-bottom: 8px;
+      scroll-snap-type: x proximity;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .project-gallery::-webkit-scrollbar{
+      height: 10px;
+    }
+
+    .project-gallery::-webkit-scrollbar-track{
+      background: rgba(255,255,255,.04);
+      border-radius: 999px;
+    }
+
+    .project-gallery::-webkit-scrollbar-thumb{
+      background: rgba(255,255,255,.14);
+      border-radius: 999px;
+    }
+
+    .project-gallery::-webkit-scrollbar-thumb:hover{
+      background: rgba(255,255,255,.22);
     }
 
     .gallery-image{
-      width: 100%;
+      flex: 0 0 auto;
+      width: 320px;
       height: 220px;
       object-fit: cover;
       border-radius: 16px;
@@ -234,6 +250,7 @@
       cursor: pointer;
       transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
       box-shadow: 0 10px 24px rgba(0,0,0,.25);
+      scroll-snap-align: start;
     }
 
     .gallery-image:hover{
@@ -346,12 +363,12 @@
       }
 
       .gallery-heading{
-        align-items: flex-start;
-        flex-direction: column;
+        margin-bottom: 12px;
       }
 
       .gallery-image{
-        height: 180px;
+        width: 260px;
+        height: 170px;
       }
 
       .lightbox{
@@ -380,11 +397,6 @@
       }
     }
 
-    @media (max-width: 860px){
-      .project-grid{
-        grid-template-columns: 1fr;
-      }
-    }
   </style>
 </head>
 <body>
@@ -464,11 +476,9 @@
 
       <section class="project-card gallery-card">
         <div class="gallery-heading">
-          <div>
-            <span class="section-label">Gallery</span>
-            <h2>Project Screenshots</h2>
-          </div>
-          <p>Click any image to open it full-screen.</p>
+          <span class="section-label">Gallery</span>
+          <h2>Project Screenshots</h2>
+          <p>Scroll sideways to browse all images, then click any screenshot to open it full-screen.</p>
         </div>
 
         <div class="project-gallery">
