@@ -94,6 +94,7 @@
     }
 
     .project-card{
+      display: block;
       background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
       border: 1px solid rgba(255,255,255,.10);
       border-radius: 22px;
@@ -148,20 +149,24 @@
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
+      align-items: center;
     }
 
     .stack-list li{
       font-size: 12px;
+      line-height: 1;
       color: var(--text);
       border: 1px solid var(--line);
-      padding: 7px 11px;
+      padding: 9px 12px;
       border-radius: 999px;
       background: rgba(255,255,255,.04);
+      white-space: nowrap;
     }
 
     .link-list{
       display: grid;
       gap: 10px;
+      max-width: 74ch;
     }
 
     .link-list a{
@@ -172,8 +177,8 @@
     }
 
     .section-label{
-      display: inline-block;
-      margin-bottom: 10px;
+      display: block;
+      margin-bottom: 8px;
       font-size: 12px;
       font-weight: 800;
       letter-spacing: .09em;
@@ -182,7 +187,7 @@
     }
 
     .gallery-card{
-      margin-top: 0;
+      margin-top: 4px;
     }
 
     .gallery-heading{
@@ -198,13 +203,31 @@
 
     .project-card > h2,
     .gallery-heading h2{
-      margin: 0 0 10px;
+      margin: 0 0 12px;
+      max-width: 22ch;
+      line-height: 1.2;
+    }
+
+    .gallery-heading h2{
+      max-width: none;
     }
 
     .project-card > p,
     .project-card li,
     .gallery-heading p{
-      line-height: 1.55;
+      line-height: 1.65;
+    }
+
+    .detail-list{
+      max-width: 72ch;
+    }
+
+    .project-card p{
+      max-width: 74ch;
+    }
+
+    .stack-list{
+      max-width: 74ch;
     }
 
     .project-actions + *{
@@ -340,6 +363,14 @@
     }
 
     @media (max-width: 640px){
+      .project-card > h2,
+      .gallery-heading h2{
+        max-width: none;
+      }
+
+      .stack-list li{
+        white-space: normal;
+      }
       .project-page{
         padding: 76px 0 42px;
       }
@@ -461,15 +492,6 @@
             <li>Data preprocessing and feature extraction pipeline for model training</li>
             <li>Machine learning workflow for classifying workout-related activities</li>
             <li>Evaluation of model performance using project results and presentation outputs</li>
-          </ul>
-        </section>
-
-        <section class="project-card">
-          <span class="section-label">Project Links</span>
-          <h2>Documentation</h2>
-          <ul class="link-list">
-            <li><a href="assets/har-report.pdf" target="_blank" rel="noopener">Open full project report</a></li>
-            <li><a href="assets/har-report.pdf" download>Download PDF copy</a></li>
           </ul>
         </section>
       </div>
